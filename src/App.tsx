@@ -3,7 +3,7 @@ import "./App.css";
 import { withAuthenticator, Button } from "@aws-amplify/ui-react";
 
 interface signOutInterface {
-  signOut?: Function;
+  signOut?: () => {};
 }
 
 function App({ signOut }: signOutInterface) {
