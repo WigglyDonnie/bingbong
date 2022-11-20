@@ -158,4 +158,6 @@ function App({ signOut }: signOutInterface) {
   // );
 }
 
-export default withAuthenticator(App);
+// add for auth
+// export default withAuthenticator(App);
+export default App;
