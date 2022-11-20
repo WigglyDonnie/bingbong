@@ -44,5 +44,12 @@
         }
       }
     }
+  },
+  "storage": {
+    "s308a1ddb3": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }
