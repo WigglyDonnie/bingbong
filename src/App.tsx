@@ -84,6 +84,14 @@ function App({ signOut }: signOutInterface) {
       <Heading level={1}>Note Paddington</Heading>
       <View as="form" margin="3rem 0" onSubmit={createNote}>
         <Flex direction="row" justifyContent="center">
+          <Flex direction="column">
+            <View
+              name="image"
+              as="input"
+              type="file"
+              style={{ alignSelf: "end" }}
+            />
+          </Flex>
           <TextField
             name="name"
             placeholder="Note Name"
@@ -132,12 +140,6 @@ function App({ signOut }: signOutInterface) {
           </Flex>
         ))}
       </View>
-      <View
-        name="image"
-        as="input"
-        type="file"
-        style={{ alignSelf: "end" }}
-      ></View>
       <Button onClick={signOut}>Sign Out</Button>
     </View>
   );
