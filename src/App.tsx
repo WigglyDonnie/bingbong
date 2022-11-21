@@ -31,15 +31,13 @@ interface Note {
 }
 
 function App({ signOut }: signOutInterface) {
-  // TODO big one.... fix any on usestate
-  const [notes, setNotes] = useState<any>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
 
   useEffect(() => {
     fetchNotes();
   }, []);
 
   async function fetchNotes() {
-    // TODO fix any
     const apiData: any = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(
@@ -53,13 +51,11 @@ function App({ signOut }: signOutInterface) {
     );
     setNotes(notesFromAPI);
   }
-  //TODO fix any
+
   async function createNote(event: any) {
     event.preventDefault();
     const form = new FormData(event.target);
-    // TODO fix any
     const image: any = form.get("image");
-    // TODO fix any
     const data: any = {
       name: form.get("name"),
       description: form.get("description"),
@@ -121,7 +117,6 @@ function App({ signOut }: signOutInterface) {
       </View>
       <Heading level={2}>Current Notes</Heading>
       <View margin="3rem 0">
-        {/* TODO fix any */}
         {notes.map((note: Note) => (
           <Flex
             key={note.id || note.name}
@@ -136,7 +131,7 @@ function App({ signOut }: signOutInterface) {
             {note.image && (
               <Image
                 src={note.image}
-                alt={`visual aid for ${notes.name}`}
+                alt={`visual aid for ${note.name}`}
                 style={{ width: 400 }}
               />
             )}
@@ -149,21 +144,6 @@ function App({ signOut }: signOutInterface) {
       <Button onClick={signOut}>Sign Out</Button>
     </View>
   );
-
-  //OG RETURN
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //
-  //       <div>Beep Boop</div>
-  //       <Button marginTop={25} color="white" onClick={signOut}>
-  //         logout
-  //       </Button>
-  //     </header>
-  //   </div>
-  // );
 }
 
-// add/remove for auth
 export default withAuthenticator(App);
-// export default App;
