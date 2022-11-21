@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
 import logo from "./logo.svg";
@@ -18,6 +18,7 @@ import {
   createNote as createNoteMutation,
   deleteNote as deleteNoteMutation,
 } from "./graphql/mutations";
+import { LineGraph } from "./acquisitions";
 
 interface signOutInterface {
   signOut?: () => {};
@@ -82,6 +83,7 @@ function App({ signOut }: signOutInterface) {
 
   return (
     <View className="App">
+      {LineGraph()}
       <img src={logo} className="App-logo" alt="logo" />
       <Heading level={1}>Note Paddington</Heading>
       <View as="form" margin="3rem 0" onSubmit={createNote}>
