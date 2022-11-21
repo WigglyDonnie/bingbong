@@ -23,6 +23,13 @@ interface signOutInterface {
   signOut?: () => {};
 }
 
+interface Note {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+}
+
 function App({ signOut }: signOutInterface) {
   // TODO big one.... fix any on usestate
   const [notes, setNotes] = useState<any>([]);
@@ -36,8 +43,7 @@ function App({ signOut }: signOutInterface) {
     const apiData: any = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
     await Promise.all(
-      //TODO fix any
-      notesFromAPI.map(async (note: any) => {
+      notesFromAPI.map(async (note: Note) => {
         if (note.image) {
           const url = await Storage.get(note.name);
           note.image = url;
@@ -67,9 +73,9 @@ function App({ signOut }: signOutInterface) {
     fetchNotes();
     event.target.reset();
   }
-  // TODO fix double any :(:(:(:(:()))))
-  async function deleteNote({ id, name }: any) {
-    const newNotes = notes.filter((note: any) => note.id !== id);
+
+  async function deleteNote({ id, name }: Note) {
+    const newNotes = notes.filter((note: Note) => note.id !== id);
     setNotes(newNotes);
     await Storage.remove(name);
     await API.graphql({
@@ -116,7 +122,7 @@ function App({ signOut }: signOutInterface) {
       <Heading level={2}>Current Notes</Heading>
       <View margin="3rem 0">
         {/* TODO fix any */}
-        {notes.map((note: any) => (
+        {notes.map((note: Note) => (
           <Flex
             key={note.id || note.name}
             direction="row"
